@@ -30,19 +30,22 @@ async function extractPdfContent(bookName) {
         if (!fs.existsSync(pdfFilePath)) {
             console.error(`Error: PDF file not found at ${pdfFilePath}`);
             return;
+        } else {
+            console.log(`${pdfFileName} exists.` )
         }
 
-        console.log(`Processing PDF file: ${pdfFileName}`);
-        const pdfData = await functions.pdfParser.parsePdf(pdfFilePath);
-        if (!pdfData) {
-            console.error('Failed to parse PDF.');
-            return;
-        }
+        const totalPages = await functions.getPdfPageCount(pdfFilePath)
+        console.log(`total pages in PDF file: ${totalPages}`);
 
-        await functions.imageExtractor.extractImages(pdfData);
-        await functions.textExtractor.extractText(pdfData);
+    // --- extarct the pages from the pdf and save them as images
+//        await functions.pageExtractor.extractPageImages(pdfFilePath);
 
-        console.log('Extraction complete.');
+// ---- extract the text from the pages
+        const extractedText = await functions.textExtractor.extractTextFromPage();
+        console.log('Extracted text complete.', extractedText);
+
+        // ---- extract the images from the pages
+//        await functions.imageExtractor.extractImages(pdfData);
 
     } catch (err) {
         console.error('Error during extraction:', err);
