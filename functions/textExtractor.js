@@ -17,7 +17,7 @@ async function extractTextFromImage(imagePath) {
 
         return data.text;
     } catch (err) {
-        console.error(`Error extractingtext from ${imagePath}:`, err);
+        console.error(`Error extracting text from ${imagePath}:`, err);
         return null;
     }
 }
@@ -33,7 +33,7 @@ async function extractTextFromPage() {
         return;
     }
 // --- pick the page to work with (e.g. 6)
-    const pagePath = path.join(pagesFolderPath, files[6]);
+    const pagePath = path.join(pagesFolderPath, files[14]);
     return await extractTextFromImage(pagePath);
 }
 
