@@ -37,19 +37,23 @@ async function extractPdfContent(bookName) {
         const totalPages = await functions.getPdfPageCount(pdfFilePath)
         console.log(`total pages in PDF file: ${totalPages}`);
 
-    // --- extract the pages from the pdf and save them as images
+    /*/ --- extract the pages from the pdf and save them as images
         await functions.pageExtractor.extractPageImages(pdfFilePath);
+*/
+        const currentPage = './pages/page_24.png'
 
-// ---- extract the text from the pages
-//        const extractedText = await functions.textExtractor.extractTextFromPage();
-//        console.log('Extracted text complete.', extractedText);
+    // --- enhance  the pages images
+        await functions.pageEnhansor(currentPage);
 
-// ---- extract the structured text from the pages
-        const extractedText = await functions.extractStructuredText('./pages/page_24.png');
-        console.log('Extracted text complete.', extractedText);
 
-// ---- extract the images from the pages
-//        await functions.imageExtractor.extractImages(pdfData);
+    // ---- extract the structured text from the pages
+        const extractedText = await functions.extractStructuredText(currentPage);
+        console.log(`${bookName} text extracted successfully.`);
+
+
+    /*/ ---- extract the images from the pages
+        await functions.imageExtractor.extractImages(pdfData);
+*/
 
     } catch (err) {
         console.error('Error during extraction:', err);

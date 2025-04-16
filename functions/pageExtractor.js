@@ -9,7 +9,7 @@ async function extractPageImages(pdfFilePath) {
 
     try {
 // TEST - get a specific range of pages
-        const numPages = 2;
+        const numPages = 20;
 /* --- to get all the pages
         const numPages = await getPdfPageCount(pdfFilePath);
         console.log(`PDF has ${numPages} pages.`);
